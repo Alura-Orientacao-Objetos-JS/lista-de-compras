@@ -5,6 +5,18 @@ const form = document.querySelector('#form-itens')
 const inputItems = document.querySelector('#receber-item')
 const ulItems = document.querySelector('#lista-de-itens')
 const ulShoppingItems = document.querySelector('#itens-comprados')
+const registerItems = localStorage.getItem('listItems')
+
+function saveLocalStorage(){
+    localStorage.setItem('listItems', JSON.stringify(listItems))
+}
+
+if(registerItems){
+    listItems = JSON.parse(registerItems)
+    showItems()
+} else {
+    listItems = []
+}
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -81,6 +93,7 @@ function showItems(){
             showItems()
         })
     })
+    saveLocalStorage()
 }
 
 function saveEdit() {
